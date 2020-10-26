@@ -11,7 +11,7 @@ export default function DayListItem(props) {
   })
 
   function formatSpots(){
-    return `${props.spots ? props.spots : 'no'} spot${props.spots != 1 ?"s" : ""} remaining`;
+    return `${props.spots ? props.spots : 'no'} spot${props.spots !== 1 ? "s" : ""} remaining`;
   }
   return (
     <li className={dayItemClass} onClick={() => props.setDay(props.name)}>
