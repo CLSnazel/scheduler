@@ -1,12 +1,14 @@
 import React from 'react';
 
-import './styles.scss'
+import Header from 'components/Appointment/Header';
 
-export default function Appointment() {
+import './styles.scss';
+
+export default function Appointment(props) {
 
   return (
     <article className="appointment">
-
+      <Header time={props.time}/>
     </article>
-  )
-}
+  );
+};
