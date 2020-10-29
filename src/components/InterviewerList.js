@@ -10,12 +10,17 @@ export default function InterviewerList(props) {
   // const interviewerListClass = classNames("interviewers", {
 
   // });
+
+  /*
+  vanilla functions => (name, id, something) 
+  props => {prop1:"asdjsk", whatever:"asldka", awesomeCallback:function()}
+  */
   const interviewerItems = props.interviewers.map( interviewer => {
     return <InterviewerListItem 
       name={interviewer.name}
       avatar={interviewer.avatar}
-      setInterviewer={(event) => props.setInterviewer(interviewer.id)}
-      selected={props.interviewer === interviewer.id}
+      setInterviewer={(event) => props.onChange(interviewer.id)}
+      selected={props.value === interviewer.id}
       key={interviewer.id}/>
   })
 
