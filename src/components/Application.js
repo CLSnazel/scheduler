@@ -7,8 +7,6 @@ import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "help
 
 import "components/Application.scss";
 
-
-
 export default function Application(props) {
   const [state, setState] = useState({
     day: "Monday",
@@ -16,8 +14,6 @@ export default function Application(props) {
     appointments: {},
     interviewers: {}
   });
-
-  
 
   useEffect(() => {
     Promise.all([
@@ -38,6 +34,48 @@ export default function Application(props) {
     })
   }, []);
 
+  function bookInterview(id, interview) {
+    console.log(id, interview);
+    const newAppointment = {
+      ...state.appointments[id],
+      interview: {...interview}
+    }
+    const newAppointments = {
+      ...state.appointments,
+      [id]: newAppointment
+    }
+    return axios.put(`/api/appointments/${id}`, newAppointment)
+    .then(()=> {
+      console.log("Successfully updated appointment");
+      setState({
+        ...state,
+        appointments: newAppointments
+      });
+      return;
+    }) 
+  }
+
+  function cancelInterview(id) {
+    const nullAppointment = {
+      ...state.appointments[id],
+      interview: null
+    }
+    const newAppointments = {
+      ...state.appointments,
+      [id]: nullAppointment
+    }
+
+    return axios.delete(`api/appointments/${id}`)
+    .then(() => {
+      console.log("Successfully updated appointment");
+      setState({
+        ...state,
+        appointments: newAppointments
+      });
+      return;
+    });
+  }
+
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
   const schedule = appointments.map((appt) => {
@@ -47,9 +85,11 @@ export default function Application(props) {
         key={appt.id}
         interview={getInterview(state, appt.interview)}
         interviewers={interviewers}
+        bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
       />
     )
-  })
+  });
 
   const setDay = day => {
     setState(prev => {
@@ -59,8 +99,7 @@ export default function Application(props) {
       }
     });
   }
-
-  
+ 
   return (
     <main className="layout">
       <section className="sidebar">

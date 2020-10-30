@@ -19,7 +19,8 @@ const useVisualMode = function(initMode) {
 
   const back = () => {
     if (history.length > 1) {
-      history.pop();
+      history.pop(); //<---bad. mutable.
+      // setHistory(history.slice(history.length - 2))
       const backTo = history[history.length - 1];
       setMode(backTo);
     }
