@@ -13,7 +13,8 @@ import './styles.scss';
 
 const EMPTY = "EMPTY";
 const SHOW = "SHOW";
-const ERROR = "ERROR";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 const CREATE = "CREATE";
 const EDIT = "EDIT";
 const SAVING = "SAVING";
@@ -37,19 +38,19 @@ export default function Appointment(props) {
       transition(SHOW);
     })
     .catch(() => {
-      transition(ERROR);
+      transition(ERROR_SAVE,  true);
     })
   }
 
   function confirmDelete() {
-    transition(DELETING);
-    // props.bookInterview(props.id, null)
+    transition(DELETING, true);
+
     props.cancelInterview(props.id)
     .then(() => {
       transition(EMPTY);
     })
     .catch(() => {
-      transition(ERROR);
+      transition(ERROR_DELETE, true);
     })
   }
 
@@ -62,6 +63,16 @@ export default function Appointment(props) {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
+          onEdit={() => transition(EDIT)}
+        />
+      )}
+      { mode === EDIT && (
+        <Form
+          onCancel={back}
+          onSave={save}
+          interviewers={props.interviewers} 
+          name={props.interview.student}
+          interviewer={props.interview.interviewer.id}
         />
       )}
       {mode === CREATE && (
@@ -82,8 +93,17 @@ export default function Appointment(props) {
       {mode === DELETING && (
         <Status message={"Deleting..."}/>
       )}
-      {mode === ERROR && (
-        <Error />
+      {mode === ERROR_SAVE && (
+        <Error 
+          message={'Could not save appointment. Please try again.'}
+          onClose={back}
+        />
+      )}
+      {mode === ERROR_DELETE && (
+        <Error 
+          message={'Could not delete appointment. Please try again.'}
+          onClose={back}
+        />
       )}
 
     </article>
