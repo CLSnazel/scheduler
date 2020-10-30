@@ -19,7 +19,6 @@ const SAVING = "SAVING";
 export default function Appointment(props) {
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 
-  const interviewers = [];
   return (
     <article className="appointment">
       <Header time={props.time}/>
@@ -30,7 +29,11 @@ export default function Appointment(props) {
           interviewer={props.interview.interviewer}
         />
       )}
-      {mode === CREATE && <Form interviewers={interviewers} onCancel={back} />}
+      {mode === CREATE && (
+        <Form 
+          onCancel={back} 
+          interviewers={props.interviewers} 
+        />)}
 
     </article>
   );
