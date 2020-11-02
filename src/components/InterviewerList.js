@@ -1,20 +1,14 @@
 import React from 'react';
-// import classNames from 'classnames';
+import PropTypes from 'prop-types';
 
 import InterviewerListItem from 'components/InterviewerListItem';
 
-import './InterviewerList.scss'
+import './InterviewerList.scss';
 
-export default function InterviewerList(props) {
 
-  // const interviewerListClass = classNames("interviewers", {
 
-  // });
+function InterviewerList(props) {
 
-  /*
-  vanilla functions => (name, id, something) 
-  props => {prop1:"asdjsk", whatever:"asldka", awesomeCallback:function()}
-  */
   const interviewerItems = props.interviewers.map( interviewer => {
     return <InterviewerListItem 
       name={interviewer.name}
@@ -34,3 +28,9 @@ export default function InterviewerList(props) {
     </section>
   );
 }
+
+InterviewerList.propTypes = {
+  interviewers: PropTypes.array
+};
+
+export default InterviewerList;
