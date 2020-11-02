@@ -26,6 +26,25 @@ export function getInterviewersForDay(state, day) {
   return interviewers;
 };
 
+export function getSpotsForDay(state, day) {
+  let currDay = state.days.filter(item => item.name === day)[0];
+  let freeApptCounter = 0;
+
+  if (currDay) {
+    let currAppts = currDay.appointments;
+
+    for (let appt of currAppts) {
+      if (!state.appointments[appt].interview) {
+        freeApptCounter++;
+      }
+    }
+  } else {
+    freeApptCounter = null;
+  }
+
+  return freeApptCounter;
+}
+
 export function getInterview(state, interview) {
 
   let interviewData = {...interview};

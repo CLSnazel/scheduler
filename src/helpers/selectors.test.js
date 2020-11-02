@@ -1,4 +1,4 @@
-import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
+import { getAppointmentsForDay, getInterview, getInterviewersForDay, getSpotsForDay } from "helpers/selectors";
 
 const state = {
   days: [
@@ -136,3 +136,22 @@ test("getInterview returns null if no interview is booked", () => {
   expect(result).toBeNull();
 });
 
+//------------------- getSpotsForDay tests --------------------------//
+
+test("getSpotsForInterview returns a number", () => {
+  const result = getSpotsForDay(state, "Monday");
+  expect(typeof(result)).toBe('number');
+});
+
+test("getSpotsForInterview returns the number of free spots for a given day", () => {
+  const monday = getSpotsForDay(state, "Monday");
+  expect(monday).toEqual(2);
+
+  const tuesday = getSpotsForDay(state, "Tuesday");
+  expect(tuesday).toEqual(1);
+});
+
+test("getSpotsForInterview returns null if the day is not found", () => {
+  const result = getSpotsForDay(state, "Wednesday");
+  expect(result).toBeNull();
+});
