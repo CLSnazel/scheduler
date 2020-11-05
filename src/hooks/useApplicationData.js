@@ -122,7 +122,7 @@ export default function useApplicationData() {
       ...state.days.slice(dayIndex + 1)
     ];
 
-    return axios.delete(`api/appointments/${id}`)
+    return axios.delete(`/api/appointments/${id}`)
     .then(() => {
       // console.log("Successfully updated appointment");
       setState(prev => ({

@@ -13,7 +13,7 @@ describe('Appointment', () => {
 
   const interviewer = "Sylvia Palmer";
   const editInterviewer = "Tori Malcolm";
-  xit ('should book an interview', () => {
+  it ('should book an interview', () => {
 
     cy.get('[alt="Add"]')
       .first()
@@ -33,7 +33,7 @@ describe('Appointment', () => {
     cy.contains('.appointment__card--show', interviewer);
   });
 
-  xit ('should edit an interview', () => {
+  it ('should edit an interview', () => {
 
     cy.get('[alt="Edit"]')
       .click({force:true})

@@ -1,5 +1,3 @@
-import { render } from "react-dom";
-
 const fixtures = {
   days: [
     {
@@ -55,6 +53,8 @@ const fixtures = {
   }
 }
 
+const fixtureReset = {...fixtures}
+
 export default {
   get: jest.fn(url => {
     if (url === "/api/days") {
@@ -84,7 +84,15 @@ export default {
 
   put: jest.fn((url, data) => {
     if (url.includes('/api/appointments/')) {
-      console.log(data);
+      return Promise.resolve({
+        status:204,
+        statusText:"No Content"
+      })
+    }
+  }),
+
+  delete: jest.fn((url, data) => {
+    if(url.includes('/api/appointments/')) {
       return Promise.resolve({
         status:204,
         statusText:"No Content"
