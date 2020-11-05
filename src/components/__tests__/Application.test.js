@@ -49,7 +49,7 @@ describe("Application", () => {
     const firstInterviewer = getAllByRole(appointment, 'listitem')[0]
     fireEvent.click(firstInterviewer);
     fireEvent.click(getByText(appointment, "Save"));
-    
+    expect(getByText(appointment, /Saving/i)).toBeInTheDocument();
     //after state successfully updates, check that the day list was updated
     await waitForElement(() => getByText(appointment, "Lydia Miller-Jones"));
     expect(getByTestId(container, "currentDay")).toHaveTextContent("Monday");
