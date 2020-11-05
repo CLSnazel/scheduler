@@ -16,7 +16,7 @@ export default function useApplicationData() {
       axios.get("/api/appointments"),
       axios.get("/api/interviewers")
     ]).then((all) => {
-      console.log(all);
+      // console.log(all);
       setState(prev => {
         return {
           ...prev,
@@ -25,7 +25,7 @@ export default function useApplicationData() {
           interviewers:all[2].data
         };
       });
-      console.log(state);
+      // console.log(state);
     })
   }, []);
 
@@ -79,8 +79,8 @@ export default function useApplicationData() {
     
     return axios.put(`/api/appointments/${id}`, newAppointment)
     .then(() => {
-      console.log("Successfully updated appointment");
-      console.log(newAppointments, newAppointment);
+      // console.log("Successfully updated appointment");
+      // console.log(newAppointments, newAppointment);
       setState(prev => (
         {
           ...prev,
@@ -109,7 +109,7 @@ export default function useApplicationData() {
     let freeSpots = getSpotsForDay(state, state.day);
     freeSpots++;
     const dayIndex = state.days.findIndex(item => item.name === state.day);
-    console.log(dayIndex);
+    // console.log(dayIndex);
 
     const newDayData = {
       ...state.days[dayIndex],
@@ -124,7 +124,7 @@ export default function useApplicationData() {
 
     return axios.delete(`api/appointments/${id}`)
     .then(() => {
-      console.log("Successfully updated appointment");
+      // console.log("Successfully updated appointment");
       setState(prev => ({
         ...prev,
         appointments: {...newAppointments},
