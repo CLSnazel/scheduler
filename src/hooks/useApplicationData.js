@@ -126,10 +126,10 @@ export default function useApplicationData() {
     .then(() => {
       // console.log("Successfully updated appointment");
       setState(prev => ({
-        ...prev,
-        appointments: {...newAppointments},
-        days:[...newDaysData]
-      }));
+          ...prev,
+          appointments: {...newAppointments},
+          days:[...newDaysData]
+        }));
       return;
     });
   }
