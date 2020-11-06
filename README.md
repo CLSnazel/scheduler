@@ -1,4 +1,15 @@
 # Interview Scheduler
+Welcome to Scheduler! The easy interview scheduler for 1-hour interviews from 12pm to 5pm. A project done as part of Lighthouse Lab's Web Development Bootcamp.
+
+### Add an interview:
+![Adding an interviewer](./docs/add.gif)
+### Add error handling:
+![Adding an interview with an error](./docs/add-error.gif)
+### Delete an interview:
+![deleting an interviewer](./docs/delete.gif)
+### Delete error handling:
+![deleting an interview with an error](./docs/delete-error.gif)
+
 
 ## Setup
 
