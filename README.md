@@ -1,5 +1,5 @@
 # Interview Scheduler
-Welcome to Scheduler! The easy interview scheduler for 1-hour interviews from 12pm to 5pm. A project done as part of Lighthouse Lab's Web Development Bootcamp.
+Welcome to Scheduler! The easy interview scheduler for 1-hour interviews from 12pm to 5pm. A project done as part of [Lighthouse Lab's](https://www.lighthouselabs.ca/) Web Development Bootcamp.
 
 ### Add an interview:
 ![Adding an interviewer](./docs/add.gif)
