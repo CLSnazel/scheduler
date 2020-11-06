@@ -8,10 +8,6 @@ export default function Form(props) {
   const [error, setError] = useState("");
   const [interviewer, setInterviewerID] = useState(props.interviewer || null);
 
-  // function clickInterviewer(interviewer) {
-  //   setInterviewID(interviewer);
-  // }
-
   function reset() {
     setName("");
     setInterviewerID(null);
@@ -42,11 +38,7 @@ export default function Form(props) {
             type="text"
             placeholder="Enter Student Name"
             value={name}
-            /*
-              This must be a controlled component
-            */
             onChange = {(event) => setName(event.target.value)}
-            
           />
         </form>
         <section className="appointment__validation">{error}</section>

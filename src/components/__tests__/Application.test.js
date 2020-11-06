@@ -6,17 +6,13 @@ import Application from "components/Application";
 
 afterEach(() => {
   cleanup();
-
 });
 
 jest.mock('axios');
 
 describe("Application", () => {
   it("defaults to Monday and changes the schedule when a new day is selected", async() => {
-    
-    /* fire events that update state */
     const { getByText, getAllByRole, getByTestId } = render(<Application />);
-
     await waitForElement(() => getByText("Monday"));
     
     //confirm monday is selected
@@ -60,7 +56,6 @@ describe("Application", () => {
 
   it("loads data, cancels an interview and increases the spots remaining for Monday by 1", async () => {
     const { container, debug } = render(<Application />);
-  
     await waitForElement(() => getByText(container, "Archie Cohen"));
 
     //get appointment

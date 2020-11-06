@@ -21,9 +21,6 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 
-
-
-
 export default function Appointment(props) {
   const {mode, transition, back} = useVisualMode(props.interview ? SHOW : EMPTY);
 

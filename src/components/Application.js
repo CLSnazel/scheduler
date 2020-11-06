@@ -16,8 +16,6 @@ export default function Application(props) {
     cancelInterview
   } = useApplicationData();
 
-  
-
   const appointments = getAppointmentsForDay(state, state.day);
   const interviewers = getInterviewersForDay(state, state.day);
   const schedule = appointments.map((appt) => {
@@ -33,8 +31,6 @@ export default function Application(props) {
     )
   });
 
-  
- 
   return (
     <main className="layout">
       <section className="sidebar">

@@ -10,13 +10,13 @@ export default function useApplicationData() {
     interviewers: {}
   });
 
+  //initial requests to render data
   useEffect(() => {
     Promise.all([
       axios.get("/api/days"),
       axios.get("/api/appointments"),
       axios.get("/api/interviewers")
     ]).then((all) => {
-      // console.log(all);
       setState(prev => {
         return {
           ...prev,
@@ -25,10 +25,10 @@ export default function useApplicationData() {
           interviewers:all[2].data
         };
       });
-      // console.log(state);
     })
   }, []);
 
+  //change day selected
   const setDay = day => {
     setState(prev => {
       return {
@@ -39,12 +39,6 @@ export default function useApplicationData() {
   }
 
   function bookInterview(id, interview) {
-    console.log(id, interview);
-
-    let newAppt = false;
-    if (!state.appointments[id].interview) {
-      newAppt = true;
-    }
     
     //Setting up Appointment update
     const newAppointment = {
@@ -62,7 +56,6 @@ export default function useApplicationData() {
       freeSpots--;
     }
     const dayIndex = state.days.findIndex(item => item.name === state.day);
-    console.log(dayIndex);
 
     const newDayData = {
       ...state.days[dayIndex],
@@ -75,12 +68,9 @@ export default function useApplicationData() {
       ...state.days.slice(dayIndex + 1)
     ];
 
-    
-    
+    ///return put request
     return axios.put(`/api/appointments/${id}`, newAppointment)
     .then(() => {
-      // console.log("Successfully updated appointment");
-      // console.log(newAppointments, newAppointment);
       setState(prev => (
         {
           ...prev,
@@ -88,7 +78,6 @@ export default function useApplicationData() {
           days:[...newDaysData]
         }
       ));
-      // console.log(state);
       return;
     });
   }
@@ -105,26 +94,22 @@ export default function useApplicationData() {
       [id]: nullAppointment
     }
 
-    //for updating remaining spots locally
-    let freeSpots = getSpotsForDay(state, state.day);
-    freeSpots++;
+    //updating remaining spots locally
+    const freeSpots = getSpotsForDay(state, state.day) + 1;
     const dayIndex = state.days.findIndex(item => item.name === state.day);
-    // console.log(dayIndex);
-
     const newDayData = {
       ...state.days[dayIndex],
       spots:freeSpots
     }
-
     const newDaysData = [
       ...state.days.slice(0, dayIndex),
       newDayData,
       ...state.days.slice(dayIndex + 1)
     ];
 
+    //return delete request
     return axios.delete(`/api/appointments/${id}`)
     .then(() => {
-      // console.log("Successfully updated appointment");
       setState(prev => ({
           ...prev,
           appointments: {...newAppointments},
